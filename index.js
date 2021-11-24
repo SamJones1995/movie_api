@@ -1,5 +1,8 @@
-const express = require('express');
+const express = require('express'),
+      morgan = require('morgan');
 const app = express();
+
+app.use(morgan('common'));
 
 let topHorror = [
   {
@@ -19,7 +22,7 @@ app.get('/movies',(req,res) => {
 //middleware
 app.use(express.static('public'));
 
-//get documentation 
+//get documentation
 app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: __dirname });
 });
