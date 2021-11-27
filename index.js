@@ -21,6 +21,13 @@ let users = [
   }
 ]
 
+let subgenres = [
+  {
+    name: 'Body horror',
+    description: 'Closely related to gore, films in the body horror subgenre may feature scenes of the human body that has been severely altered.'
+  }
+]
+
 app.get('/',(req,res) => {
   res.send('Welcome to myHorror!');
 });
@@ -34,6 +41,12 @@ app.get('/horrorMovies',(req,res) => {
 app.get('/horrorMovies/:title', (req,res) => {
   res.json(horrorMovies.find( (horrorMovie) =>
     { return horrorMovie.title === req.params.title}));
+});
+
+//show a subgenre and description
+app.get('/subgenres/:name', (req,res) => {
+  res.json(subgenres.find( (subgenre) =>
+    {return subgenre.name === req.params.name}));
 });
 
 //middleware
