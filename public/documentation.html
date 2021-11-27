@@ -5,6 +5,60 @@
  </head>
  <body>
   <h1>Horror Movies API</h1>
-  <p>This API will provide a searchable database on Horror movies made since the year 2000. It will feature searches by actor and subgenre.
+  <p>This API will provide a searchable database on Horror movies made since the year 2000. It will feature searches by actor and subgenre.</p>
+  table showing URL endpoints and request methods
+  <table>
+    <tr>
+      <th>Request</th>
+      <th>URL</th>
+      <th>Response</th>
+    </tr>
+    <tr>
+      <td>Return a list of all movies(GET): Request body-none</td>
+      <td>/horrorMovies</td>
+      <td>JSON object shwowing a list of all movie titles</td>
+    </tr>
+    <tr>
+      <td>Return data on one movie(GET): Request body-none</td>
+      <td>/horrorMovies/[movie name]</td>
+      <td>JSON object showing data on movie defined in URL</td>
+    <tr>
+      <td>Return data about a subgenre(GET): Request body-none</td>
+      <td>/horrorMovies/subgenres/[subgenre name]</td>
+      <td>JSON object showing subgenre description</td>
+    </tr>
+    <tr>
+      <td>Return data about a director(GET): Request body-none</td>
+      <td>/horrorMovies/directors/[director name]</td>
+      <td>JSON object showing director bio, birth year, death year</td>
+    </tr>
+    <tr>
+      <td>Allow new user to register(POST): Request body- JSON object with new user info</td>
+      <td>/horrorMovies/users</td>
+      <td>JSON object showing new user info just added</td>
+    </tr>
+    <tr>
+      <td>Allow new user to update username(PUT): Request body-none</td>
+      <td>/horrorMovies/users/[new username]</td>
+      <td>Text message showing showing the user information with new username</td>
+    </tr>
+    <tr>
+      <td>Allow new user to add a movie to their list of favorites(PUT): Request body-JSON object with movie data to be added to favorites</td>
+      <td>/horrorMovies/users/favorites</td>
+      <td>Text message showing that the movie has been added to favorites</td>
+    </tr>
+    <tr>
+      <td>Allow new users to remove movie from favorites(DELETE): Request body-none</td>
+      <td>/horrorMovies/users/favorites/[movie name]</td>
+      <td>Text message showing movie has been deleete from favorites</td>
+    </tr>
+    <tr>
+      <td>Allow users to deregister their account(DELETE): Request body-none</td>
+      <td>/horrorMovies/users/[username to be deleted]</td>
+      <td>Text message showing username that has been deleted</td>
+    </tr>
+  </table>
+
+
  </body>
 </html>
