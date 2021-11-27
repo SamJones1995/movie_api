@@ -17,7 +17,8 @@ let horrorMovies = [
 let users = [
   {
     username: 'Test1',
-    password: 'Test1'
+    password: 'Test1',
+    favorites: 'Testmovie'
   }
 ]
 
@@ -87,6 +88,20 @@ app.put('/users/:username', (req,res) => {
     res.status(201).send('User ' + req.params.username + ' was updated. ');
   } else {
     res.status(404).send('User ' + req.params.name + ' was not found.');
+  }
+});
+
+//Allow user to add movie to list of favorites
+app.post('/users/favorites', (req,res) => {
+  let newFavorite = req.body;
+
+  if(!newFavorite.name) {
+    const message = 'Missing movie name';
+    res.status(400).send(message);
+  } else {
+    newFavorite.id = uuid.v4();
+    users.favorites.push(newFavorite);
+    res.status(201).send(newFavorite);
   }
 });
 
