@@ -3,7 +3,7 @@ const express = require('express'),
 const app = express();
 
 
-let topHorror = [
+let horrorMovies = [
   {
     title:  'The Ritual',
     director: 'David Bruckner'
@@ -15,7 +15,7 @@ app.get('/',(req,res) => {
 });
 
 app.get('/movies',(req,res) => {
-  res.json(topHorror);
+  res.json(horrorMovies);
 });
 
 //middleware
