@@ -7,6 +7,17 @@ let horrorMovies = [
   {
     title:  'The Ritual',
     director: 'David Bruckner'
+  },
+  {
+    title: 'The Ring',
+    director: 'Gore Verbinski'
+  }
+]
+
+let users = [
+  {
+    username: 'Test1',
+    password: 'Test1'
   }
 ]
 
@@ -14,8 +25,15 @@ app.get('/',(req,res) => {
   res.send('Welcome to myHorror!');
 });
 
-app.get('/movies',(req,res) => {
+//show list of all horror movie data
+app.get('/horrorMovies',(req,res) => {
   res.json(horrorMovies);
+});
+
+//show one movie's data by name
+app.get('/horrorMovies/:title', (req,res) => {
+  res.json(horrorMovies.find( (horrorMovie) =>
+    { return horrorMovie.title === req.params.title}));
 });
 
 //middleware
