@@ -18,7 +18,9 @@ let users = [
   {
     username: 'Test1',
     password: 'Test1',
-    favorites: 'Testmovie'
+    favorites: {
+      name: 'movie1'
+    }
   }
 ]
 
@@ -67,16 +69,7 @@ app.get('/directors/:name', (req,res) => {
 
 //Allow new user to register
 app.post('/users', (req,res) => {
-  let newUser = req.body;
-
-  if(!newUser.name) {
-    const message = 'Missing username';
-    res.status(400).send(message);
-  } else {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).send(newUser);
-  }
+  res.send('Successful POST request for adding new user');
 });
 
 //Allow user to update username
@@ -92,17 +85,18 @@ app.put('/users/:username', (req,res) => {
 });
 
 //Allow user to add movie to list of favorites
-app.post('/users/favorites', (req,res) => {
-  let newFavorite = req.body;
+app.post('/users/:username/favorites/:title', (req,res) => {
+  res.send('Successful POST request for adding new favorite movie');
+});
 
-  if(!newFavorite.name) {
-    const message = 'Missing movie name';
-    res.status(400).send(message);
-  } else {
-    newFavorite.id = uuid.v4();
-    users.favorites.push(newFavorite);
-    res.status(201).send(newFavorite);
-  }
+//Allow user to remove movie from list of favorites
+app.delete('/users/:username/favorites/:title', (req, res) => {
+  res.send('Successful DELETE request for favorites item');
+});
+
+//Allow user to delete user account
+app.delete('/users/:username', (req,res) => {
+  res.send('Successful DELETE request for user account');
 });
 
 //middleware
