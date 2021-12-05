@@ -16,49 +16,101 @@
     <tr>
       <td>Return a list of all movies(GET): Request body-none</td>
       <td>/horrorMovies</td>
-      <td>JSON object showing a list of all movie titles</td>
+      <td>JSON object showing a list of all movie titles
+    </td>
     </tr>
     <tr>
       <td>Return data on one movie(GET): Request body-none</td>
-      <td>/horrorMovies/:title</td>
-      <td>JSON object showing data on movie defined in URL</td>
+      <td>/horrorMovies/:Title</td>
+      <td>JSON object showing data on movie defined in URL EX: {
+        "Genre": {
+            "Name": "Animated",
+            "Description": "example description"
+        },
+        "Director": {
+            "Name": "Victor Cook",
+            "Bio": "example bio",
+            "Birthyear": "1960",
+            "Deathyear": "2021"
+        },
+        "_id": "61a6ea6a134d6f40c5d220f0",
+        "Description": "exmple description",
+        "ImagePath": "hellboyanimated.png",
+        "Featured": false,
+        "Title": "Hellboy Animated: Blood and Iron"
+    }</td>
     <tr>
       <td>Return data about a subgenre(GET): Request body-none</td>
-      <td>/subgenres/:name</td>
-      <td>JSON object showing subgenre description</td>
+      <td>/horrorMovies/Genres/:Name</td>
+      <td>JSON objects showing movie data under requested genre EX:{
+        "Genre": {<br>
+            "Name": "Animated",
+            "Description": "example description"
+        },
+        "Director": {
+            "Name": "Victor Cook",
+            "Bio": "example bio",
+            "Birthyear": "1960",
+            "Deathyear": "2021"
+        },
+        "_id": "61a6e926134d6f40c5d220ef",
+        "Description": "example description",
+        "ImagePath": "dantesinferno.png",
+        "Featured": false,
+        "Title": "Dante's Inferno"}<br></td>
     </tr>
     <tr>
       <td>Return data about a director(GET): Request body-none</td>
-      <td>/directors/:name</td>
-      <td>JSON object showing director bio, birth year, death year</td>
+      <td>/horrorMovies/Directors/:Name</td>
+      <td>JSON object showing director bio, birth year, death year, and all directed movies</td>
     </tr>
     <tr>
       <td>Allow new user to register(POST): Request body- JSON object with new user info EX
-        {
-        username: 'Test1',
-        password: 'Test1',
-        }</td>
+        {<br>
+        "Username": "Test1",<br>
+        "Password": "Test1",<br>
+        "email": "email@email.com",<br>
+        "Birthdate": "1992-01-01"<br>
+        }</td><br>
       <td>/users</td>
-      <td>JSON object showing new user info just added</td>
+      <td>JSON object showing new user info just added   {<br>
+        "Username": "Test1",<br>
+        "Password": "Test1",<br>
+        "email": "email@email.com",<br>
+        "Birthdate": "1992-01-01"<br>
+        "FavoriteMovies": []
+        }</td>
     </tr>
     <tr>
-      <td>Allow new user to update username(PUT): Request body-none</td>
-      <td>/users/:username</td>
-      <td>Text message showing showing the user information with new username</td>
+      <td>Allow new user to update user info(PUT): Request body-json object with new user info EX:
+        {<br>
+      "Username": "Test1",<br>
+      "Password": "Test1",<br>
+      "email": "email1234@email.com",<br>
+      "Birthdate": "1992-01-01"<br>
+      }</td>
+      <td>/users/:Username</td>
+      <td>JSON object showing current user info after update {<br>
+    "Username": "Test1",<br>
+    "Password": "Test1",<br>
+    "email": "email1234@email.com",<br>
+    "Birthdate": "1992-01-01"<br>
+    "FavoriteMovies": []
+    }</td>
     </tr>
     <tr>
-      <td>Allow new user to add a movie to their list of favorites(PUT): Request body-JSON object with movie title to be added to favorites EX 'The Ritual'</td>
-      <td>/users/:username/favorites/:title</td>
-      <td>Text message showing that the movie has been added to favorites</td>
+      <td>Allow new user to add a movie to their list of favorites(PUT): Request body-none</td>
+      <td>/users/:Username/movies/:MovieID</td>
+      <td>JSON object of current user info including newly added favorite movie</td>
     </tr>
     <tr>
       <td>Allow new users to remove movie from favorites(DELETE): Request body-none</td>
-      <td>/users/:username/favorites/:title</td>
-      <td>Text message showing movie has been deleted from favorites</td>
+      <td>/users/:Username/movies/:MovieID</td>
+      <td>JSON object of current user info including newly deleted favorite movie</td>
     </tr>
     <tr>
       <td>Allow users to deregister their account(DELETE): Request body-none</td>
-      <td>/users/:username</td>
+      <td>/users/:Username</td>
       <td>Text message showing username that has been deleted</td>
     </tr>
   </table>
