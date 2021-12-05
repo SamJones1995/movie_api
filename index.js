@@ -25,19 +25,19 @@ app.get('/horrorMovies',(req,res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      res.status(500).send('Error: ' + err);
     });
 });
 
 //show one movie's data by name
 app.get('/horrorMovies/:Title', (req,res) => {
-  Movies.findOne()
+  Movies.findOne( {Title: req.params.Title} )
     .then((movieTitle) => {
       res.status(201).json(movieTitle);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      res.status(500).send('Error: ' + err);
     });
 });
 
