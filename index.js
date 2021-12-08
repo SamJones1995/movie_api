@@ -1,18 +1,36 @@
 const express = require('express'),
       morgan = require('morgan');
 const bodyParser = require('body-parser');
+const uuid = ('uuid');
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 const mongoose = require('mongoose');
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
+
+
+
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/myHorrorDB', {useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+
+let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
+app.use(passport.initialize());
+
+
+app.use(express.static('public'));
+app.use(morgan('common'));
+
 
 
 app.get('/',(req,res) => {
@@ -187,9 +205,7 @@ app.delete('/users/:Username', (req,res) => {
     });
 });
 
-//middleware
-app.use(express.static('public'));
-app.use(morgan('common'));
+
 
 //get documentation
 app.get('/documentation', (req, res) => {
