@@ -5,8 +5,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const mongoose = require('mongoose');
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 const Models = require('./models.js');
-
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -18,7 +20,7 @@ app.get('/',(req,res) => {
 });
 
 //show list of all horror movie data
-app.get('/horrorMovies',(req,res) => {
+app.get('/horrorMovies', passport.authenticate('jwt', { session: false }), (req,res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
