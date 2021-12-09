@@ -9,11 +9,12 @@ let generateJWTToken = (user) => {
   return jwt.sign(user, jwtSecret, {
     subject: user.Username,
     expiresIn: '7d', //specifies token will expire in 7 days
-    algorithim: 'HS256' //algorithim used to encode the values of the JWT
+    algorithm: 'HS256' //algorithim used to encode the values of the JWT
   });
 }
 
 module.exports = (router) => {
+  router.use(passport.initialize());
   router.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
       if (error || !user) {
