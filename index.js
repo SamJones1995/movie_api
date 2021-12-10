@@ -107,7 +107,7 @@ app.post('/users',
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Password', 'Password must be 8 characters long').isLength({min: 8}),
-    check('Email', 'Email does not appear to be valid').isEmail()
+    check('email', 'Email does not appear to be valid').isEmail()
   ], (req, res) => {
 
   // check the validation object for errors
