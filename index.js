@@ -169,11 +169,11 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 //Allow user to update info by username
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
 [
-  check('Username', 'Username is required').isLength({min: 5}),
-  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-  check('Password', 'Password is required').not().isEmpty(),
-  check('Password', 'Password must be 8 characters long').isLength({min: 8}),
-  check('email', 'Email does not appear to be valid').isEmail()
+  check('Username', 'Username is required, minimum of 5 characters').isLength({min: 5}).optional(),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric().optional(),
+  check('Password', 'Password is required').not().isEmpty().optional(),
+  check('Password', 'Password must be 8 characters long').isLength({min: 8}).optional(),
+  check('email', 'Email does not appear to be valid').isEmail().optional()
 ],
 (req,res) => {
   // check validation result
