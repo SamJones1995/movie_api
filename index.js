@@ -12,6 +12,20 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+const cors = require('cors');
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 mongoose.connect('mongodb://localhost:27017/myHorrorDB', {useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
@@ -87,22 +101,23 @@ app.get('/horrorMovies/Directors/:Name', passport.authenticate('jwt', { session:
 
 //Allow new user to register
 app.post('/users', (req,res) => {
-  Users.findOne({ Username: req.body.Username })
+  let hashedPassword = Users.hashPassword(req.body.Password);
+  Users.findOne({ Username: req.body.Username }) //search to see if User already exists
     .then((user) => {
-      if(user) {
+      if(user) { //if use is found send below response
         return res.status(400).send(req.body.Username + 'already exists');
       } else {
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             email: req.body.email,
             Birthdate: req.body.Birthdate
           })
           .then((user) =>{res.status(201).json(user) })
-        .catch((error) => {
-          console.error(error);
-          res.status(500).send('Erorr:' + error);
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Erorr:' + error);
         })
       }
     })
