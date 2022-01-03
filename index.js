@@ -53,7 +53,7 @@ app.get('/',(req,res) => {
 });
 
 //show list of all horror movie data
-app.get('/horrorMovies', passport.authenticate('jwt', { session: false }), (req,res) => {
+app.get('/horrorMovies', (req,res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
