@@ -53,12 +53,12 @@ app.get('/',(req,res) => {
 });
 
 //show list of all horror movie data
-app.get('/horrorMovies', (req,res) => {
+app.get('/horrorMovies', function (req, res)  {
   Movies.find()
-    .then((movies) => {
+    .then(function (movies)  {
       res.status(201).json(movies);
     })
-    .catch((err) => {
+    .catch(function (err)  {
       console.error(err);
       res.status(500).send('Error: ' + err);
     });
