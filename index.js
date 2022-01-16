@@ -53,7 +53,7 @@ app.get('/',(req,res) => {
 });
 
 //show list of all horror movie data
-app.get('/horrorMovies', function (req, res)  {
+app.get('/horrorMovies', passport.authenticate('jwt', { session: false }), (req, res)  {
   Movies.find()
     .then(function (movies)  {
       res.status(201).json(movies);
@@ -131,7 +131,7 @@ app.post('/users',
           })
           .then((user) =>{res.status(201).json(user) })
           .catch((error) => {
-            console.error(error);
+            console.log(error);
             res.status(500).send('Erorr:' + error);
         })
       }
