@@ -13,7 +13,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8080', 'https://myhorrormovies.herokuapp.com', 'http://localhost:1234'];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -53,7 +53,7 @@ app.get('/',(req,res) => {
 });
 
 //show list of all horror movie data
-app.get('/horrorMovies', passport.authenticate('jwt', { session: false }), (req, res)  {
+app.get('/horrorMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then(function (movies)  {
       res.status(201).json(movies);
