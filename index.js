@@ -5,7 +5,7 @@ const uuid = ('uuid');
 const app = express();
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 
 
 const Models = require('./models.js');
